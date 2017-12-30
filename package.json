@@ -71,5 +71,9 @@
     "execMap": {
       "js": "babel-node"
     }
+  },
+  "jest": {
+    "testPathIgnorePatterns": ["/node_modules/", "/vendor", "/dist", "/app/config"],
+    "testEnvironment": "node"
   }
 }

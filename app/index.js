@@ -4,9 +4,9 @@ import koaLogger from 'koa-logger'
 import helmet from 'koa-helmet'
 import cors from '@koa/cors'
 import compress from 'koa-compress'
-import path from 'path'
 
-process.env.NODE_CONFIG_DIR = path.join(__dirname, 'config')
+const Boot = require('./services/env').default
+Boot()
 
 // Create Koa Application
 const app = new Koa()
