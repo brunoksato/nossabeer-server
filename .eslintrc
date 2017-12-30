@@ -1,0 +1,9 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["jest"],
+  "extends": ["standard", "plugin:jest/recommended"],
+  "env": {
+    "jest/globals": true,
+    "node": true
+  }
+}
