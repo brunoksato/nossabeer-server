@@ -40,8 +40,14 @@ import sequelize from '../services/connection'
 })
 export class Place extends Model {
   static associate (models) {
+    this.hasMany(models.PlaceTime)
+    this.hasMany(models.PlaceReview)
     this.belongsTo(models.Address, {
       foreignKey: 'address_id'
+    })
+    this.belongsToMany(models.Product, {
+      through: 'place_products',
+      foreignKey: 'product_id'
     })
   }
 

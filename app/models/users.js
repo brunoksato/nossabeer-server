@@ -45,7 +45,18 @@ import sequelize from '../services/connection'
 })
 export class User extends Model {
   static associate (models) {
-    this.hasMany(models.Address)
+    this.hasOne(models.Address)
+    this.hasMany(models.Product)
+    this.hasMany(models.Notification)
+    this.hasMany(models.Message)
+    this.belongsToMany(models.Product, {
+      through: 'user_product_favorites',
+      foreignKey: 'product_id'
+    })
+    this.belongsToMany(models.Seller, {
+      through: 'user_seller_follows',
+      foreignKey: 'seller_id'
+    })
   }
 
   resetPassword (password) {

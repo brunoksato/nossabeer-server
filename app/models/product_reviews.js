@@ -4,7 +4,7 @@ import sequelize from '../services/connection'
 
 @Options({
   sequelize,
-  tableName: 'sellers'
+  tableName: 'product_reviews'
 })
 @Attributes({
   id: {
@@ -13,29 +13,32 @@ import sequelize from '../services/connection'
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  cnpj: {
-    type: DataTypes.STRING(50),
+  vote: {
+    type: DataTypes.INTEGER,
     allowNull: false
   },
-  type: {
-    type: DataTypes.ENUM(['company', 'freelance']),
+  title: {
+    type: DataTypes.STRING(255),
     allowNull: false
   },
-  facebook: {
+  description: {
+    type: DataTypes.STRING(2000),
+    allowNull: false
+  },
+  image: {
     type: DataTypes.STRING(255),
     allowNull: true
+  },
+  status: {
+    type: DataTypes.ENUM(['pending', 'approved', 'refused']),
+    allowNull: false,
+    defaltValue: 'pending'
   }
 })
-export class Seller extends Model {
+export class ProductReview extends Model {
   static associate (models) {
-    this.hasMany(models.City)
-    this.hasMany(models.Message)
-    this.belongsTo(models.User, {
-      foreignKey: 'user_id'
-    })
-    this.belongsToMany(models.User, {
-      through: 'user_seller_follows',
-      foreignKey: 'user_id'
+    this.belongsTo(models.Product, {
+      foreignKey: 'product_id'
     })
   }
 }

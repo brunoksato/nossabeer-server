@@ -4,7 +4,7 @@ import sequelize from '../services/connection'
 
 @Options({
   sequelize,
-  tableName: 'sellers'
+  tableName: 'messages'
 })
 @Attributes({
   id: {
@@ -13,29 +13,26 @@ import sequelize from '../services/connection'
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  cnpj: {
-    type: DataTypes.STRING(50),
-    allowNull: false
-  },
-  type: {
-    type: DataTypes.ENUM(['company', 'freelance']),
-    allowNull: false
-  },
-  facebook: {
+  title: {
     type: DataTypes.STRING(255),
-    allowNull: true
+    allowNull: false
+  },
+  link: {
+    type: DataTypes.STRING(500),
+    allowNull: false
+  },
+  read: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }
 })
-export class Seller extends Model {
+export class Message extends Model {
   static associate (models) {
-    this.hasMany(models.City)
-    this.hasMany(models.Message)
     this.belongsTo(models.User, {
       foreignKey: 'user_id'
     })
-    this.belongsToMany(models.User, {
-      through: 'user_seller_follows',
-      foreignKey: 'user_id'
+    this.belongsTo(models.Seller, {
+      foreignKey: 'seller_id'
     })
   }
 }
