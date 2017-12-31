@@ -14,11 +14,11 @@ import sequelize from '../services/connection'
     type: DataTypes.INTEGER
   },
   monday_start: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   monday_end: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   monday_open: {
@@ -26,11 +26,11 @@ import sequelize from '../services/connection'
     defaultValue: true
   },
   tuesday_start: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   tuesday_end: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   tuesday_open: {
@@ -38,11 +38,11 @@ import sequelize from '../services/connection'
     defaultValue: true
   },
   wednesday_start: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   wednesday_end: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   wednesday_open: {
@@ -50,11 +50,11 @@ import sequelize from '../services/connection'
     defaultValue: true
   },
   thursday_start: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   thursday_end: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   thursday_open: {
@@ -62,11 +62,11 @@ import sequelize from '../services/connection'
     defaultValue: true
   },
   friday_start: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   friday_end: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   friday_open: {
@@ -74,11 +74,11 @@ import sequelize from '../services/connection'
     defaultValue: true
   },
   saturday_start: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   saturday_end: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   saturday_open: {
@@ -86,11 +86,11 @@ import sequelize from '../services/connection'
     defaultValue: true
   },
   sunday_start: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   sunday_end: {
-    type: DataTypes.TIME,
+    type: DataTypes.STRING(50),
     allowNull: false
   },
   sunday_open: {

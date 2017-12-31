@@ -9,7 +9,7 @@ const sequelize = new Sequelize(config.get('PG_URI'), {
   },
   logging: false,
   operatorsAliases: Sequelize.Op,
-  dialect: config.get('dialect')
+  dialect: 'postgre'
 })
 
 export default sequelize

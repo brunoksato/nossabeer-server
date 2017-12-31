@@ -1,108 +1,105 @@
-const Boot = require('../../services/env').default
+import Boot from '../../services/env'
 
 Boot()
-
-const User = require('../index').User
-const db = require('../../services/connection').default
+const models = require('../index')
+const User = models.User
 
 beforeEach(async () => {
-  await db.sync({ force: true })
+  await User.sync({ force: true })
 })
 
-test('users model exist', async () => {
+test('user model exist', async () => {
   expect(User).toBeDefined()
 })
 
-describe('crud models users', () => {
-  test('list', async () => {
-    await User.create({
-      name: 'Bruno',
-      email: 'bruno@gmail.com',
-      password: '123456'
-    })
-    await User.create({
-      name: 'Bruno2',
-      email: 'bruno2@gmail.com',
-      password: '123456'
-    })
-    const result = await User.findAll()
-    expect(result).toBeDefined()
-    expect(result).toHaveLength(2)
+test('list users', async () => {
+  await User.create({
+    name: 'Bruno',
+    email: 'bruno@gmail.com',
+    password: '123456'
+  })
+  await User.create({
+    name: 'Bruno2',
+    email: 'bruno2@gmail.com',
+    password: '123456'
+  })
+  const result = await User.findAll()
+  expect(result).toBeDefined()
+  expect(result).toHaveLength(2)
+})
+
+test('get users', async () => {
+  await User.create({
+    name: 'Bruno',
+    email: 'bruno@gmail.com',
+    password: '123456'
+  })
+  await User.create({
+    name: 'Bruno2',
+    email: 'bruno2@gmail.com',
+    password: '123456'
+  })
+  const result = await User.findOne({
+    where: {
+      name: 'Bruno'
+    }
+  })
+  expect(result).toBeDefined()
+  expect(result.name).toEqual('Bruno')
+})
+
+test('create users', async () => {
+  await User.create({
+    name: 'Bruno',
+    email: 'bruno@gmail.com',
+    password: '123456'
+  })
+})
+
+test('update users', async () => {
+  await User.create({
+    name: 'Bruno',
+    email: 'bruno@gmail.com',
+    password: '123456'
   })
 
-  test('get', async () => {
-    await User.create({
-      name: 'Bruno',
-      email: 'bruno@gmail.com',
-      password: '123456'
-    })
-    await User.create({
-      name: 'Bruno2',
-      email: 'bruno2@gmail.com',
-      password: '123456'
-    })
-    const result = await User.findOne({
+  await User.update(
+    {
+      name: 'Bruno2'
+    },
+    {
       where: {
         name: 'Bruno'
       }
-    })
-    expect(result).toBeDefined()
-    expect(result.name).toEqual('Bruno')
+    }
+  )
+
+  const result = await User.findOne({
+    where: {
+      name: 'Bruno2'
+    }
+  })
+  expect(result).toBeDefined()
+  expect(result.name).toEqual('Bruno2')
+})
+
+test('delete users', async () => {
+  await User.create({
+    name: 'Bruno',
+    email: 'bruno@gmail.com',
+    password: '123456'
   })
 
-  test('create', async () => {
-    await User.create({
-      name: 'Bruno',
-      email: 'bruno@gmail.com',
-      password: '123456'
-    })
+  await User.destroy({
+    where: {
+      name: 'Bruno'
+    }
   })
 
-  test('update', async () => {
-    await User.create({
-      name: 'Bruno',
-      email: 'bruno@gmail.com',
-      password: '123456'
-    })
-
-    await User.update(
-      {
-        name: 'Bruno2'
-      },
-      {
-        where: {
-          name: 'Bruno'
-        }
-      }
-    )
-
-    const result = await User.findOne({
-      where: {
-        name: 'Bruno2'
-      }
-    })
-    expect(result).toBeDefined()
-    expect(result.name).toEqual('Bruno2')
+  const result = await User.findOne({
+    where: {
+      name: 'Bruno'
+    }
   })
-
-  test('delete', async () => {
-    await User.create({
-      name: 'Bruno',
-      email: 'bruno@gmail.com',
-      password: '123456'
-    })
-
-    await User.destroy({
-      where: {
-        name: 'Bruno'
-      }
-    })
-
-    const result = await User.findOne({
-      where: {
-        name: 'Bruno2'
-      }
-    })
-    expect(result).toBeNull()
-  })
+  expect(result).toBeNull()
 })

@@ -3,4 +3,5 @@
   "javascript.format.enable": false,
   "prettier.eslintIntegration": true,
   "eslint.packageManager": "yarn",
+  "jest.autoEnable": false
 }

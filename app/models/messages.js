@@ -13,12 +13,8 @@ import sequelize from '../services/connection'
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  title: {
-    type: DataTypes.STRING(255),
-    allowNull: false
-  },
-  link: {
-    type: DataTypes.STRING(500),
+  text: {
+    type: DataTypes.STRING(4000),
     allowNull: false
   },
   read: {

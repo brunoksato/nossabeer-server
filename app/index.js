@@ -4,12 +4,13 @@ import koaLogger from 'koa-logger'
 import helmet from 'koa-helmet'
 import cors from '@koa/cors'
 import compress from 'koa-compress'
+import Boot from './services/env'
 
-const Boot = require('./services/env').default
 Boot()
 
 // Create Koa Application
 const app = new Koa()
+
 const config = require('config')
 const port = config.get('http.port')
 const sequelize = require('./services/connection').default
@@ -26,8 +27,6 @@ app
     })
   )
   .use(router.routes())
-
-// models.sequelize.drop()
 
 // Start the application
 sequelize.sync().then(() => {

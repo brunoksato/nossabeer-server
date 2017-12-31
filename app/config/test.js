@@ -1,5 +1,5 @@
 module.exports = {
-  PG_URI: process.env.PG_URI || 'postgres://localhost:5432/nossabeer',
+  PG_URI: 'postgres://localhost:5432/nossabeer',
   http: {
     port: 8080
   },
@@ -10,6 +10,5 @@ module.exports = {
   },
   baseApi: 'api',
   database: 'nossabeer',
-  host: 'localhost',
-  dialect: 'postgres'
+  host: 'localhost'
 }

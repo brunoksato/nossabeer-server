@@ -7,12 +7,24 @@ Object.assign(
   {},
   ...fs
     .readdirSync(__dirname)
-    .filter(file => file.indexOf('.') !== 0 && file !== 'index.js' && file !== '__tests__')
+    .filter(
+      file =>
+        file.indexOf('.') !== 0 &&
+        file !== 'index.js' &&
+        file !== '__tests__' &&
+        file !== '__tests_'
+    )
     .map(function (file) {
       require(path.join(__dirname, file))
-      return {}
+      // const modelName = Object.keys(model)[0]
+      return {
+        // [modelName]: model[modelName]
+      }
     })
 )
+
+// if (db.models)
+//   db.models = db
 
 // Load model associations
 for (const model of Object.keys(db.models)) {

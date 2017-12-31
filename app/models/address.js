@@ -15,19 +15,19 @@ import sequelize from '../services/connection'
   },
   street: {
     type: DataTypes.STRING(255),
-    allowNull: false
+    allowNull: true
   },
   number: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   district: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   zipcode: {
     type: DataTypes.STRING(50),
-    allowNull: false
+    allowNull: true
   },
   complement: {
     type: DataTypes.STRING(100),
@@ -47,6 +47,9 @@ export class Address extends Model {
     this.hasMany(models.Place)
     this.belongsTo(models.User, {
       foreignKey: 'user_id'
+    })
+    this.belongsTo(models.City, {
+      foreignKey: 'city_id'
     })
   }
 }
