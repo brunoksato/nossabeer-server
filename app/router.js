@@ -4,8 +4,13 @@ import { baseApi } from 'config'
 import UsersControllers from './controllers/users'
 
 const router = new Router()
-
 router.prefix(`/${baseApi}`)
+
+router.get('/', async ctx => {
+  ctx.body = {
+    API: 'NOSSABEER API'
+  }
+})
 
 // AUTH
 router.post('/signin', UsersControllers.signin)

@@ -10,28 +10,20 @@ Boot()
 
 // Create Koa Application
 const app = new Koa()
-
-const config = require('config')
-const port = config.get('http.port')
-const sequelize = require('./services/connection').default
 const router = require('./router').default
 
-app
-  .use(koaLogger())
-  .use(bodyParser())
-  .use(helmet())
-  .use(cors())
-  .use(
-    compress({
-      flush: require('zlib').Z_SYNC_FLUSH
-    })
-  )
-  .use(router.routes())
-
-// Start the application
-sequelize.sync().then(() => {
-  console.log('✅  Database connected')
-  app.listen(port, () => console.log(`✅  The server is running at http://localhost:${port}/`))
-})
+if (process.env.NODE_ENV === 'development') {
+  app.use(koaLogger())
+}
+app.use(bodyParser())
+app.use(helmet())
+app.use(cors())
+app.use(
+  compress({
+    flush: require('zlib').Z_SYNC_FLUSH
+  })
+)
+app.use(router.routes())
+app.use(router.allowedMethods())
 
 export default app
