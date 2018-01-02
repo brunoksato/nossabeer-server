@@ -17,6 +17,7 @@ class UsersControllers {
           message: 'User not found',
           key: 'login'
         })
+        ctx.throw(400)
       }
 
       const isCorrect = await User.verifyPassword(user.password, payload.password)
@@ -25,6 +26,7 @@ class UsersControllers {
           message: 'Wrong authentication credentials',
           key: 'password'
         })
+        ctx.throw(400)
       }
 
       const token = User.genToken(user.id, {
@@ -33,14 +35,15 @@ class UsersControllers {
 
       ctx.body = {
         token: token,
-        type: 'bearer',
         expires: moment()
           .add(1, 'year')
           .toDate(),
         user: user
       }
+      ctx.status = 200
     } catch (err) {
       ctx.body = Boom.badRequest(err)
+      ctx.throw(400)
     }
   }
 
@@ -53,6 +56,7 @@ class UsersControllers {
       ctx.body = {
         success: true
       }
+      ctx.status = 201
     } catch (err) {
       ctx.body = Boom.badRequest(err)
     }
