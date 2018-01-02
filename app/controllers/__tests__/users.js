@@ -18,7 +18,7 @@ afterEach(() => {
   server.close()
 })
 
-describe('POST /api/signin', () => {
+describe('POST /public/signin', () => {
   test('should give me a token if credentials are valid', async () => {
     const user = {
       email: 'bruno@gmail.com',
@@ -33,7 +33,7 @@ describe('POST /api/signin', () => {
     userCreate.password = await User.encryptPassword(user.password)
     await User.create(userCreate)
     const response = await request
-      .post('/api/signin')
+      .post('/public/signin')
       .set('Content-type', 'application/json')
       .type('json')
       .send(user)
@@ -49,12 +49,12 @@ describe('POST /api/signin', () => {
       email: 'bruno@gmail.com',
       password: '123456'
     }
-    const response = await request.post('/api/signin').send(user)
+    const response = await request.post('/public/signin').send(user)
     expect(response.status).toEqual(400)
   })
 })
 
-describe('POST /api/signup', () => {
+describe('POST /public/signup', () => {
   test('should create a new user', async () => {
     const user = {
       name: 'Bruno',
@@ -62,12 +62,31 @@ describe('POST /api/signup', () => {
       password: '123456'
     }
     const response = await request
-      .post('/api/signup')
+      .post('/public/signup')
       .set('Content-type', 'application/json')
       .type('json')
       .send(user)
 
     expect(response.status).toEqual(201)
     expect(response.body.success).toEqual(true)
+  })
+})
+
+describe('POST /api/users/me', () => {
+  test('should get logged user', async () => {
+    const user = {
+      name: 'Bruno',
+      email: 'bruno@gmail.com',
+      password: '123456'
+    }
+    user.password = await User.encryptPassword(user.password)
+    const getUser = await User.create(user)
+    const token = User.genToken(getUser.get('id'), {
+      expiresIn: 525949
+    })
+    const response = await request.get('/api/users/me').set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toEqual(200)
+    expect(response.body.email).toEqual(getUser.get('email'))
   })
 })

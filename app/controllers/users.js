@@ -26,7 +26,7 @@ class UsersControllers {
           message: 'Wrong authentication credentials',
           key: 'password'
         })
-        ctx.throw(400)
+        ctx.throw(401)
       }
 
       const token = User.genToken(user.id, {
@@ -57,6 +57,18 @@ class UsersControllers {
         success: true
       }
       ctx.status = 201
+    } catch (err) {
+      ctx.body = Boom.badRequest(err)
+    }
+  }
+
+  async me (ctx) {
+    try {
+      const user = await User.findOne({
+        where: { email: ctx.userCtx.email }
+      })
+      ctx.body = user
+      ctx.status = 200
     } catch (err) {
       ctx.body = Boom.badRequest(err)
     }

@@ -75,7 +75,7 @@
   "jest": {
     "testPathIgnorePatterns": ["/node_modules/", "/vendor", "/dist", "/app/config"],
     "testEnvironment": "node",
-    "verbose": true,
+    "verbose": false,
     "globals": {
       "PG_URI": "postgres://localhost:5432/nossabeer"
     }

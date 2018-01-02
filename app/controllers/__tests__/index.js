@@ -12,9 +12,9 @@ afterEach(() => {
   server.close()
 })
 
-describe('GET /api', () => {
+describe('GET /', () => {
   test('should give me a api message', async () => {
-    const response = await request.get('/api')
+    const response = await request.get('/')
     expect(response.status).toEqual(200)
     expect(response.body.API).toEqual('NOSSABEER API')
   })

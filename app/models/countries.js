@@ -26,4 +26,13 @@ export class Country extends Model {
   static associate (models) {
     this.hasMany(models.State)
   }
+
+  toJSON () {
+    const values = Object.assign({}, this.get())
+
+    delete values.created_at
+    delete values.updated_at
+    delete values.deleted_at
+    return values
+  }
 }

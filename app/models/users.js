@@ -59,6 +59,16 @@ export class User extends Model {
     })
   }
 
+  toJSON () {
+    const values = Object.assign({}, this.get())
+
+    delete values.created_at
+    delete values.updated_at
+    delete values.deleted_at
+    delete values.password
+    return values
+  }
+
   static resetPassword (password) {
     this.password = password
     this.forget_password.token = null
@@ -82,7 +92,7 @@ export class User extends Model {
         if (err) {
           return reject(Boom.unauthorized('Invalid user'))
         }
-        resolve([user, obj])
+        resolve(user)
       })
     })
   }
