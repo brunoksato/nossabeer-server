@@ -1,10 +1,8 @@
 import Router from 'koa-router'
-import { baseApi } from 'config'
-// import jwt from '../middlewares/jwt'
 import UsersControllers from './controllers/users'
+import SellersControllers from './controllers/sellers'
 
 const router = new Router()
-router.prefix(`/${baseApi}`)
 
 router.get('/', async ctx => {
   ctx.body = {
@@ -13,12 +11,17 @@ router.get('/', async ctx => {
 })
 
 // AUTH
-router.post('/signin', UsersControllers.signin)
-router.post('/signup', UsersControllers.signup)
+router.post('/public/signin', UsersControllers.signin)
+router.post('/public/signup', UsersControllers.signup)
 
-// router.get('/:id', jwt, CitiesControllers.findById)
-// router.post('/', jwt, CitiesControllers.add)
-// router.put('/:id', jwt, CitiesControllers.update)
-// router.delete('/:id', jwt, CitiesControllers.delete)
+// USERS
+router.get('/api/users/me', UsersControllers.me)
+
+// SELLERS
+router.get('/public/sellers', SellersControllers.list)
+router.get('/public/sellers/:id', SellersControllers.get)
+router.post('/api/sellers', SellersControllers.create)
+router.put('/api/sellers/:id', SellersControllers.update)
+router.delete('/api/sellers/:id', SellersControllers.delete)
 
 export default router

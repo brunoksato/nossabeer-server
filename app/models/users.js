@@ -59,14 +59,24 @@ export class User extends Model {
     })
   }
 
-  resetPassword (password) {
+  toJSON () {
+    const values = Object.assign({}, this.get())
+
+    delete values.created_at
+    delete values.updated_at
+    delete values.deleted_at
+    delete values.password
+    return values
+  }
+
+  static resetPassword (password) {
     this.password = password
     this.forget_password.token = null
     this.forget_password.updated_at = moment().format()
     return this.save()
   }
 
-  parseToken (token, options) {
+  static parseToken (token, options) {
     return new Promise((resolve, reject) => {
       let obj = null
       try {
@@ -82,12 +92,12 @@ export class User extends Model {
         if (err) {
           return reject(Boom.unauthorized('Invalid user'))
         }
-        resolve([user, obj])
+        resolve(user)
       })
     })
   }
 
-  verifyPassword (hash, password) {
+  static verifyPassword (hash, password) {
     return new Promise((resolve, reject) => {
       scrypt.verify(hash, password, (err, equal) => {
         if (err) {
@@ -99,7 +109,7 @@ export class User extends Model {
     })
   }
 
-  genToken (id, options) {
+  static genToken (id, options) {
     return jwt.sign(
       {
         user: id
@@ -108,7 +118,7 @@ export class User extends Model {
     )
   }
 
-  encryptPassword (password) {
+  static encryptPassword (password) {
     return new Promise((resolve, reject) => {
       scrypt.hash(password, (err, hash) => {
         if (err) {

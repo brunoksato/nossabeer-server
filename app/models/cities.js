@@ -25,4 +25,13 @@ export class City extends Model {
       foreignKey: 'state_id'
     })
   }
+
+  toJSON () {
+    const values = Object.assign({}, this.get())
+
+    delete values.created_at
+    delete values.updated_at
+    delete values.deleted_at
+    return values
+  }
 }

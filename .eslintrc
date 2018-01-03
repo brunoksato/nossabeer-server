@@ -5,5 +5,8 @@
   "env": {
     "jest/globals": true,
     "node": true
+  },
+  "rules": {
+    "jest/no-identical-title": "off"
   }
 }

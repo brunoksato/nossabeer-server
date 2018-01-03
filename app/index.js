@@ -10,6 +10,7 @@ Boot()
 
 // Create Koa Application
 const app = new Koa()
+const session = require('./middlewares/session').default
 const router = require('./router').default
 
 if (process.env.NODE_ENV === 'development') {
@@ -23,6 +24,7 @@ app.use(
     flush: require('zlib').Z_SYNC_FLUSH
   })
 )
+app.use(session)
 app.use(router.routes())
 app.use(router.allowedMethods())
 
