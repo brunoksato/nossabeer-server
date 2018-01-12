@@ -1,5 +1,5 @@
 module.exports = {
-  PG_URI: 'postgres://localhost:5432/nossabeer',
+  PG_URI: 'postgres://postgres:123456@localhost:5432/nossabeer',
   http: {
     port: 8080
   },
