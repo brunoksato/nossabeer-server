@@ -5,6 +5,7 @@ import ProductsControllers from './controllers/products'
 import ProductReviewControllers from './controllers/products_reviews'
 import PlacesControllers from './controllers/places'
 import CountriesControllers from './controllers/countries'
+import StateControllers from './controllers/states'
 
 const router = new Router()
 
@@ -55,5 +56,12 @@ router.get('/public/countries/:id', CountriesControllers.get)
 router.post('/api/countries', CountriesControllers.create)
 router.put('/api/countries/:id', CountriesControllers.update)
 router.delete('/api/countries/:id', CountriesControllers.delete)
+
+// STATE
+router.get('/public/states', StateControllers.list)
+router.get('/public/states/:id', StateControllers.get)
+router.post('/api/states', StateControllers.create)
+router.put('/api/states/:id', StateControllers.update)
+router.delete('/api/states/:id', StateControllers.delete)
 
 export default router
