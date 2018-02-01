@@ -1,5 +1,5 @@
 import Boom, { badRequest } from 'boom'
-import { Country } from './models'
+import { Country } from '../models'
 
 class CountriesControllers {
   async list (ctx) {

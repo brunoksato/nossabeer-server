@@ -1,5 +1,5 @@
 import Boom from 'boom'
-import { Place } from './models'
+import { Place } from '../models'
 
 class PlacesControllers {
   async list (ctx) {
