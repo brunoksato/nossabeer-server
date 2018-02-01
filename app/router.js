@@ -3,6 +3,7 @@ import UsersControllers from './controllers/users'
 import SellersControllers from './controllers/sellers'
 import ProductsControllers from './controllers/products'
 import ProductReviewControllers from './controllers/products_reviews'
+import PlacesControllers from './controllers/places'
 
 const router = new Router()
 
@@ -39,5 +40,12 @@ router.get('/public/products_reviews/:id', ProductReviewControllers.get)
 router.post('/api/products_reviews', ProductReviewControllers.create)
 router.put('/api/products_reviews/:id', ProductReviewControllers.update)
 router.delete('/api/products_reviews/:id', ProductReviewControllers.delete)
+
+// PLACES
+router.get('/public/places', PlacesControllers.list)
+router.get('/public/places/:id', PlacesControllers.get)
+router.post('/api/places', PlacesControllers.create)
+router.put('/api/places/:id', PlacesControllers.update)
+router.delete('/api/places/:id', PlacesControllers.delete)
 
 export default router
