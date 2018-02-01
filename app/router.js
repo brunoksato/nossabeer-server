@@ -4,6 +4,7 @@ import SellersControllers from './controllers/sellers'
 import ProductsControllers from './controllers/products'
 import ProductReviewControllers from './controllers/products_reviews'
 import PlacesControllers from './controllers/places'
+import CountriesControllers from './controllers/countries'
 
 const router = new Router()
 
@@ -47,5 +48,12 @@ router.get('/public/places/:id', PlacesControllers.get)
 router.post('/api/places', PlacesControllers.create)
 router.put('/api/places/:id', PlacesControllers.update)
 router.delete('/api/places/:id', PlacesControllers.delete)
+
+// COUNTRIES
+router.get('/public/countries', CountriesControllers.list)
+router.get('/public/countries/:id', CountriesControllers.get)
+router.post('/api/countries', CountriesControllers.create)
+router.put('/api/countries/:id', CountriesControllers.update)
+router.delete('/api/countries/:id', CountriesControllers.delete)
 
 export default router
